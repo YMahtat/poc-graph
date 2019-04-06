@@ -21,6 +21,15 @@ public class AuthProperties {
     @Value("${ms-confidential.user.password}")
     private String userPassword;
 
+    @Value("${ms-confidential.grant.user}")
+    private String grantUser;
+
+    @Value("${ms-confidential.grant.application}")
+    private String grantApplication;
+
+    @Value("${ms-confidential.scope.default}")
+    private String defaultScope;
+
     @Value("${microsoft.auth.url}")
     private String authentificationUrl;
 
@@ -44,6 +53,18 @@ public class AuthProperties {
         return userPassword;
     }
 
+    public String getGrantUser() {
+        return grantUser;
+    }
+
+    public String getGrantApplication() {
+        return grantApplication;
+    }
+
+    public String getDefaultScope() {
+        return defaultScope;
+    }
+
     public String getAuthentificationUrl() {
         return authentificationUrl;
     }
@@ -56,6 +77,9 @@ public class AuthProperties {
                 ", clientSecret='" + this.getClientSecret() + '\'' +
                 ", userEmail='" + this.getUserEmail() + '\'' +
                 ", userPassword='" + this.getUserPassword() + '\'' +
+                ", grantUser='" + this.getGrantUser() + '\'' +
+                ", grantApplication='" + this.getGrantApplication() + '\'' +
+                ", defaultScope='" + this.getDefaultScope() + '\'' +
                 ", authentificationUrl='" + this.getAuthentificationUrl() + '\'' +
                 '}';
     }
