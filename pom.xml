@@ -12,6 +12,7 @@
 	<artifactId>pocgraph</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pocgraph</name>
+	<packaging>jar</packaging>
 	<description>Demo project for POC of MS Graph API</description>
 
 	<properties>
