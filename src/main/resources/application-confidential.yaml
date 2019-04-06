@@ -6,5 +6,5 @@ microsoft:
             id: "c6ac7fa2-b8cc-43b2-b4df-f55854f09586"
             secret: "{9]:&n/&Q{6&o^%^&i[!)lq"
         user:
-            email:
-            password: 
+            email: #your microsoft-email#
+            password: #your password#
