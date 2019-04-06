@@ -1,0 +1,14 @@
+microsoft:
+    auth:
+        url: https://login.microsoftonline.com
+        action:
+            get-token: /oauth2/v2.0/token
+
+    graph:
+        url: https://graph.microsoft.com/v1.0
+        action:
+            users: /users
+            messages-folder: /mailFolders
+            messages: /messages
+            move: /move
+            me: /me
