@@ -1,8 +1,6 @@
 microsoft:
     auth:
-        url: https://login.microsoftonline.com
-        action:
-            get-token: /oauth2/v2.0/token
+        url: https://login.microsoftonline.com/${ms-confidential.tenant.id}/oauth2/v2.0/token
 
     graph:
         url: https://graph.microsoft.com/v1.0
