@@ -1,15 +1,20 @@
 package com.cgi.mpw.pocgraph.utilities;
 
-import com.cgi.mpw.pocgraph.entities.Token;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@Scope("prototype")
 public class RestUtilityBuilder {
 
     private RestTemplate restTemplate;
@@ -44,12 +49,34 @@ public class RestUtilityBuilder {
 
 
     public ResponseEntity post(){
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(requestParams, headers);
-        return restTemplate.postForEntity(this.url, entity, this.responseType);
+        try {
+            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(requestParams, headers);
+            return restTemplate.postForEntity(this.url, entity, this.responseType);
+        } catch (HttpClientErrorException ex) {
+            System.out.println(ex.getResponseBodyAsString());
+            return null;
+        }
+    }
+
+    public ResponseEntity postJson(){
+        try {
+            Gson objGson = new GsonBuilder().setPrettyPrinting().create();
+            String requestJson = objGson.toJson(requestParams.toSingleValueMap());
+            HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
+            return restTemplate.postForEntity(this.url, entity, this.responseType);
+        } catch (HttpClientErrorException ex) {
+            System.out.println(ex.getResponseBodyAsString());
+            return null;
+        }
     }
 
     public ResponseEntity get(){
-        HttpEntity entity = new HttpEntity(headers);
-        return restTemplate.exchange(this.url, HttpMethod.GET, entity, this.responseType);
+        try {
+            HttpEntity entity = new HttpEntity(headers);
+            return restTemplate.exchange(this.url, HttpMethod.GET, entity, this.responseType);
+        } catch (HttpClientErrorException ex) {
+            System.out.println(ex.getResponseBodyAsString());
+            return null;
+        }
     }
 }

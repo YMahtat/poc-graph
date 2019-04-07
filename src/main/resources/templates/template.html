@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>POC-GRAPH</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.css">
+    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+<div style="min-height: 100%;width: 98%; max-width: 100%" class="container w-100">
+    <div class="w-100">
+
+        <div style="text-align: center;width: 100%">
+            <table class="table mx-auto">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>id</th>
+                        <th>received</th>
+                        <th>from</th>
+                        <th>isRead</th>
+                        <th>subject</th>
+                        <th>bodyPreview</th>
+                        <th>actionMove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="word-wrap: break-word;" th:each="message: ${list}">
+                        <td style="width: 15%" class="text-center w" th:text="${message.id}">data</td>
+                        <td style="width: 15%" class="text-center" th:text="${message.receivedDateTime}">data</td>
+                        <td style="width: 15%" class="text-center" th:text="${message.from}">data</td>
+                        <td style="width: 15%" class="text-center" th:text="${message.isRead}">data</td>
+                        <td style="width: 15%" class="text-center" th:text="${message.subject}">data</td>
+                        <td style="width: 15%" class="text-center" th:text="${message.bodyPreview}">data</td>
+                        <td style="width: 10%">
+                            <button type="button" class="btn btn-danger" th:onclick="'window.location.href = \'' + @{/outlook/move/{id}(id=${message.id})} + '\''">
+                                move to archive
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+
+</body>
+</html>

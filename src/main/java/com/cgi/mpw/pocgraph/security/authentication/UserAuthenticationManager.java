@@ -3,9 +3,10 @@ package com.cgi.mpw.pocgraph.security.authentication;
 
 
 import com.cgi.mpw.pocgraph.configurations.AuthProperties;
-import com.cgi.mpw.pocgraph.entities.Token;
+import com.cgi.mpw.pocgraph.entities.MicrosoftToken;
 import com.cgi.mpw.pocgraph.utilities.RestUtilityBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.util.MultiValueMap;
 
 
 @Service
+@Scope("prototype")
 public class UserAuthenticationManager implements IAuthentificationManager {
 
   @Autowired AuthProperties authProperties;
@@ -24,7 +26,7 @@ public class UserAuthenticationManager implements IAuthentificationManager {
   public UserAuthenticationManager() {
   }
 
-  public Token getToken() {
+  public MicrosoftToken getToken() {
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -37,11 +39,11 @@ public class UserAuthenticationManager implements IAuthentificationManager {
     requestParams.add("password", authProperties.getUserPassword());
     requestParams.add("scope", authProperties.getDefaultScope());
 
-    ResponseEntity<Token> response = restUtilityBuilder
+    ResponseEntity<MicrosoftToken> response = restUtilityBuilder
             .addUrl(authProperties.getAuthentificationUrl())
             .addHeaders(headers)
             .addParametersBody(requestParams)
-            .addResponseType(Token.class)
+            .addResponseType(MicrosoftToken.class)
             .post();
 
     return response.getBody();

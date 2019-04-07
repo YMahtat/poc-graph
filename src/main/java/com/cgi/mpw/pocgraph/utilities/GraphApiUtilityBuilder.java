@@ -1,9 +1,10 @@
 package com.cgi.mpw.pocgraph.utilities;
 
 import com.cgi.mpw.pocgraph.configurations.GraphApiEndPointProperties;
-import com.cgi.mpw.pocgraph.entities.Token;
+import com.cgi.mpw.pocgraph.entities.MicrosoftToken;
 import com.cgi.mpw.pocgraph.security.authentication.IAuthentificationManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 
 @Component
+@Scope("prototype")
 public class GraphApiUtilityBuilder {
 
     private HttpHeaders headers;
@@ -27,7 +29,7 @@ public class GraphApiUtilityBuilder {
         this.graphApiEndPointProperties = graphApiEndPointProperties;
         endPoint = graphApiEndPointProperties.getUrl();
         headers = new HttpHeaders();
-        Token token = authentificationManager.getToken();
+        MicrosoftToken token = authentificationManager.getToken();
         headers.set("Authorization", token.getTokenType() + " " + token.getAccessToken());
     }
 
@@ -44,6 +46,6 @@ public class GraphApiUtilityBuilder {
                 .addHeaders(headers)
                 .addParametersBody(requestParams)
                 .addResponseType(responseType)
-                .post();
+                .postJson();
     }
 }
