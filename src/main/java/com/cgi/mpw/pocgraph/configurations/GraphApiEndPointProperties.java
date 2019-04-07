@@ -12,4 +12,11 @@ public class GraphApiEndPointProperties {
     @Value("${microsoft.graph.action.users}")
     private String usersAction;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUsersAction() {
+        return usersAction;
+    }
 }

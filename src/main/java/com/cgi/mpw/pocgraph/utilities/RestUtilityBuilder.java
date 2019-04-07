@@ -45,13 +45,11 @@ public class RestUtilityBuilder {
 
     public ResponseEntity post(){
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(requestParams, headers);
-        ResponseEntity<Token> response = restTemplate.postForEntity(this.url, entity, this.responseType);
-        return response;
+        return restTemplate.postForEntity(this.url, entity, this.responseType);
     }
 
     public ResponseEntity get(){
         HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<Token> response = restTemplate.exchange(this.url, HttpMethod.GET, entity, this.responseType);
-        return response;
+        return restTemplate.exchange(this.url, HttpMethod.GET, entity, this.responseType);
     }
 }

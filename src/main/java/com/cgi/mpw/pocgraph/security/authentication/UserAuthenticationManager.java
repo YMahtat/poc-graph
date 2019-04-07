@@ -17,12 +17,9 @@ import org.springframework.util.MultiValueMap;
 @Service
 public class UserAuthenticationManager implements IAuthentificationManager {
 
-  @Autowired
-  AuthProperties authProperties;
+  @Autowired AuthProperties authProperties;
 
-  @Autowired
-  RestUtilityBuilder restUtilityBuilder;
-
+  @Autowired RestUtilityBuilder restUtilityBuilder;
 
   public UserAuthenticationManager() {
   }
