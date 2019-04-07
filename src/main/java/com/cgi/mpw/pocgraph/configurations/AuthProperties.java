@@ -30,7 +30,7 @@ public class AuthProperties {
     @Value("${ms-confidential.scope.default}")
     private String defaultScope;
 
-    @Value("${microsoft.auth.url}")
+    @Value("${microsoft.authority.url}")
     private String authentificationUrl;
 
     public String getTenentId() {

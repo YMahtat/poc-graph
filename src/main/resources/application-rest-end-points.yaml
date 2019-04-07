@@ -1,12 +1,12 @@
 microsoft:
-    auth:
+    authority:
         url: https://login.microsoftonline.com/${ms-confidential.tenant.id}/oauth2/v2.0/token
 
     graph:
         url: https://graph.microsoft.com/v1.0
         action:
             users: /users
-            messages-folder: /mailFolders
+            mail-folders: /mailFolders
             messages: /messages
             move: /move
             me: /me
